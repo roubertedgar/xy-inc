@@ -2,13 +2,24 @@ group 'com.zup.select.process'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
 
-sourceCompatibility = 1.8
+springBootVersion = '1.5.3.RELEASE'
 
-repositories {
-    mavenCentral()
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile 'org.springframework.data:spring-data-jpa:1.11.3.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
