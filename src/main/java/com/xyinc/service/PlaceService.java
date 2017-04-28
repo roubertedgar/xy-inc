@@ -26,14 +26,14 @@ public class PlaceService {
         List<String> response = new ArrayList<>();
 
         if (coordinates == null) {
-            placeRepository.findAll().forEach(p -> response.add(p.getName()));
+            placeRepository.findAll().forEach(place -> response.add(place.getName()));
         } else {
             String[] xy = coordinates.split(",");
             Double coordinateX = new Double(xy[COORDINATE_X]);
             Double coordinateY = new Double(xy[COORDINATE_Y]);
 
             placeRepository.findByCoordinate(coordinateX, coordinateY,10.0)
-                    .forEach(p -> response.add(p.getName()));
+                    .forEach(place -> response.add(place.getName()));
         }
 
         HttpStatus httpStatus = response.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.ACCEPTED;
