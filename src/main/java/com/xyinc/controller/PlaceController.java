@@ -25,7 +25,7 @@ public class PlaceController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Long savePlace(@RequestParam Place place) {
+    public Long savePlace(@RequestBody Place place) {
         return placeService.save(place);
     }
 }
