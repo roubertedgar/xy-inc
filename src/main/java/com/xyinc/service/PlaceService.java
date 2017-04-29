@@ -3,44 +3,41 @@ package com.xyinc.service;
 import com.xyinc.model.Place;
 import com.xyinc.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Streams.stream;
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class PlaceService {
-    private static final int COORDINATE_X = 0;
-    private static final int COORDINATE_Y = 1;
+
+    private static final int COORDINATE_X_INDEX = 0;
+    private static final int COORDINATE_Y_INDEX = 1;
+    private static final Double METERS_RANGE = 10.0;
 
     @Autowired
     private PlaceRepository placeRepository;
 
-    public ResponseEntity<List<String>> findPlace() {
-        return findPlace(null);
+    public List<String> findPlaces() {
+        return stream(placeRepository.findAll())
+                .map(Place::getName)
+                .collect(toList());
     }
 
-    public ResponseEntity<List<String>> findPlace(String coordinates) {
-        List<String> response = new ArrayList<>();
+    public List<String> findPlaces(String coordinates) {
 
-        if (coordinates == null) {
-            placeRepository.findAll().forEach(place -> response.add(place.getName()));
-        } else {
-            String[] xy = coordinates.split(",");
-            Double coordinateX = new Double(xy[COORDINATE_X]);
-            Double coordinateY = new Double(xy[COORDINATE_Y]);
+        String[] xy = coordinates.split(",");
+        Double coordinateX = new Double(xy[COORDINATE_X_INDEX]);
+        Double coordinateY = new Double(xy[COORDINATE_Y_INDEX]);
 
-            placeRepository.findByCoordinate(coordinateX, coordinateY,10.0)
-                    .forEach(place -> response.add(place.getName()));
-        }
-
-        HttpStatus httpStatus = response.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.ACCEPTED;
-        return new ResponseEntity<>(response, httpStatus);
+        return placeRepository.findByCoordinate(coordinateX, coordinateY, METERS_RANGE).stream()
+                .map(Place::getName)
+                .collect(toList());
     }
 
-    public Long save(Place place) {
-        return placeRepository.save(place).getId();
+    public Place save(Place place) {
+        return placeRepository.save(place);
     }
 }
