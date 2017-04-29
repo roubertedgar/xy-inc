@@ -2,7 +2,6 @@ package com.xyinc.controller;
 
 import com.xyinc.model.Place;
 import com.xyinc.service.PlaceService;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,10 +33,9 @@ public class PlaceController {
 
     @RequestMapping(value = "/{coordinates}", method = RequestMethod.GET)
     public ResponseEntity<List<String>> getPlaces(@PathVariable
-                                                  @NotBlank
-                                                  @Pattern(regexp = "\\d*,\\d*") String coordinates) {
-        final List<String> response = placeService.findPlaces(coordinates);
+                                                  @Pattern(regexp = "\\d+(\\.\\d+)?,\\d+(\\.\\d+)?") String coordinates) {
 
+        final List<String> response = placeService.findPlaces(coordinates);
         return toHttpResponse(response);
     }
 
