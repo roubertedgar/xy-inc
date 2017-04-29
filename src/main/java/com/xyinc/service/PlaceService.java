@@ -12,8 +12,8 @@ import java.util.List;
 
 @Component
 public class PlaceService {
-    private static final int LONGITUDE_X = 0;
-    private static final int LATITUDE_Y = 1;
+    private static final int COORDINATE_X = 0;
+    private static final int COORDINATE_Y = 1;
 
     @Autowired
     private PlaceRepository placeRepository;
@@ -26,12 +26,14 @@ public class PlaceService {
         List<String> response = new ArrayList<>();
 
         if (coordinates == null) {
-            placeRepository.findAll().forEach(p -> response.add(p.getName()));
+            placeRepository.findAll().forEach(place -> response.add(place.getName()));
         } else {
             String[] xy = coordinates.split(",");
-            Double longitude = new Double(xy[LONGITUDE_X]);
-            Double latitude = new Double(xy[LATITUDE_Y]);
-           // placeRepository.findByLatitudeLongitude(longitude, latitude).forEach(p -> response.add(p.getName()));
+            Double coordinateX = new Double(xy[COORDINATE_X]);
+            Double coordinateY = new Double(xy[COORDINATE_Y]);
+
+            placeRepository.findByCoordinate(coordinateX, coordinateY,10.0)
+                    .forEach(place -> response.add(place.getName()));
         }
 
         HttpStatus httpStatus = response.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.ACCEPTED;
