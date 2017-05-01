@@ -33,7 +33,7 @@ public class PlaceController {
 
     @RequestMapping(value = "/{coordinates}", method = RequestMethod.GET)
     public ResponseEntity<List<String>> getPlaces(@PathVariable
-                                                  @Pattern(regexp = "\\d+(\\.\\d+)?,\\d+(\\.\\d+)?") String coordinates) {
+                                                  @Pattern(regexp = "[0-9]+(\\.[0-9]+)?,[0-9]+(\\.[0-9]+)?") String coordinates) {
 
         final List<String> response = placeService.findPlaces(coordinates);
         return toHttpResponse(response);
