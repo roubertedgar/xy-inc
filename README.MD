@@ -30,3 +30,13 @@ XY Inc, salve pontos de interesse (PoI´s) e os encontre de forma facil, listand
 ### Testes
   - Na pasta raiz do projeto
   - Execute o comando ```gradle test```
+  
+# Tecnologias
+* [Spring Boot](https://projects.spring.io/spring-boot/)
+* [Lombok](https://projectlombok.org/features/)
+* [Guava](https://github.com/google/guava/wiki)
+* [H2 Database](http://www.h2database.com/html/main.html)
+* [Assure](http://rest-assured.io/)
+* [AssertJ](http://joel-costigliola.github.io/assertj/)
+* [Mockito](http://site.mockito.org/)
+* [JUnit](http://junit.org/junit4/)
