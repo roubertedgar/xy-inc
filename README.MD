@@ -18,15 +18,15 @@ XY Inc, salve pontos de interesse (PoI´s) e os encontre de forma facil, listand
 
     Método Caminho         Código                        
     Get    /place          200(Ok) ou 204(No content)
-    Get    /place/x.y      200(Ok), 204(No content), 400(Bad Request)     
+    Get    /place/x,y      200(Ok), 204(No content), 400(Bad Request)     
     Post   /plcae          201(Created) 
            /error          500(Internal server error)
 # Como rodar
 ### Aplicação
   - Beixe o projeto
   - Na pasta raiz do projeto
-  - Execute o comando gradle bootrun para subir a aplicação
+  - Execute o comando ```gradle bootrun``` para subir a aplicação
 
 ### Testes
   - Na pasta raiz do projeto
-  - Execute o comando gradle test
+  - Execute o comando ```gradle test```
