@@ -9,7 +9,7 @@ XY Inc, salve pontos de interesse (PoI´s) e os encontre de forma facil, listand
     Caminho     Método    Função
     /place      Get       retorna todos os POI's
     /place/x,y  Get       retorna PoI´s num raio de dez metros a partir de xy 
-    /place      Post      salva um PoI
+    /place      Post      salva um PoI e o retorna atualizado com seu id
     /error                apresenta a excessão lançada pelo servidor
     
 ##### Códigos de resposta
